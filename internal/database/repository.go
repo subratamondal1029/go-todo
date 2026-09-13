@@ -90,7 +90,7 @@ func ToggleDone(id int) (Todos, error) {
 	for i, t := range todos {
 		if t.Id == id {
 			todos[i].Completed = !todos[i].Completed
-			todos[i].CreatedAt = time.Now()
+			todos[i].CompletedAt = time.Now()
 		}
 	}
 
@@ -110,6 +110,7 @@ func Delete(id int) (Todos, error) {
 	for i, t := range todos {
 		if t.Id == id {
 			todos = append(todos[:i], todos[i+1:]...)
+			break
 		}
 	}
 

@@ -14,7 +14,7 @@ func main() {
 	args, err := pkgs.GetArguments()
 
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 	}
 
 	switch args.Operation {
@@ -22,7 +22,7 @@ func main() {
 		todos, err := database.Read()
 
 		if err != nil {
-			log.Fatal(err)
+			log.Panic(err)
 		}
 
 		if len(todos) == 0 {

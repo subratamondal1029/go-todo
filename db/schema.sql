@@ -6,6 +6,9 @@ CREATE TABLE todos (
     completed_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE INDEX idx_completed_created_at
+ON todos (completed ASC, created_at ASC);
 -- Dbmate schema migrations
 INSERT INTO "schema_migrations" (version) VALUES
-  ('20260913143538');
+  ('20260913143538'),
+  ('20260913145622');

@@ -41,7 +41,7 @@ func main() {
 		}
 
 		todos.PrintDataTable()
-	case pkgs.Done:
+	case pkgs.ToggleDone:
 		// Mark completed (id)
 		id := args.Value[0]
 		intId, err := strconv.Atoi(id)
@@ -50,7 +50,7 @@ func main() {
 			log.Panicf("Invalid ID: %s", id)
 		}
 
-		todos, err := database.Completed(intId)
+		todos, err := database.ToggleDone(intId)
 		if err != nil {
 			log.Panic(err)
 		}

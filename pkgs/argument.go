@@ -8,10 +8,10 @@ import (
 type Operation string
 
 const (
-	Add    Operation = "add"
-	List   Operation = "list"
-	Done   Operation = "done"
-	Delete Operation = "delete"
+	Add        Operation = "add"
+	List       Operation = "list"
+	ToggleDone Operation = "toggle-done"
+	Delete     Operation = "delete"
 )
 
 type Argument struct {
@@ -33,8 +33,8 @@ func GetArguments() (*Argument, error) {
 		arg = Argument{Operation: Add}
 	case string(List):
 		arg = Argument{Operation: List}
-	case string(Done):
-		arg = Argument{Operation: Done}
+	case string(ToggleDone):
+		arg = Argument{Operation: ToggleDone}
 	case string(Delete):
 		arg = Argument{Operation: Delete}
 	default:

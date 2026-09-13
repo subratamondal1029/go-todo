@@ -80,7 +80,7 @@ func Create(title string) (Todos, error) {
 	return todos, nil
 }
 
-func Completed(id int) (Todos, error) {
+func ToggleDone(id int) (Todos, error) {
 	todos, err := Read()
 
 	if err != nil {
@@ -89,7 +89,7 @@ func Completed(id int) (Todos, error) {
 
 	for i, t := range todos {
 		if t.Id == id {
-			todos[i].Completed = true
+			todos[i].Completed = !todos[i].Completed
 			todos[i].CreatedAt = time.Now()
 		}
 	}

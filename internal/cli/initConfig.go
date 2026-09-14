@@ -33,9 +33,17 @@ func init() {
 
 	dbPath := filepath.Join(appStateDir, dbName)
 
-	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
-		if err := os.WriteFile(dbPath, emptyDB, 0644); err != nil {
-			log.Panicf("Can't create database file, %v", err)
+	dbPathStat, err := os.Stat(dbPath)
+
+	if err != nil {
+		if os.IsNotExist(err) {
+			if err := os.WriteFile(dbPath, emptyDB, 0644); err != nil {
+				log.Panicf("Can't create database file, %v", err)
+			}
+		} else if dbPathStat.IsDir() {
+			log.Panicln("Database file is a directory")
+		} else {
+			log.Panicf("Error reading db file, %v", err)
 		}
 	}
 

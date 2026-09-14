@@ -1,4 +1,4 @@
-package pkgs
+package cli
 
 import (
 	"fmt"
@@ -10,6 +10,7 @@ type Operation string
 const (
 	Add        Operation = "add"
 	List       Operation = "list"
+	Get        Operation = "get"
 	ToggleDone Operation = "toggle-done"
 	Delete     Operation = "delete"
 )
@@ -31,6 +32,8 @@ func GetArguments() (*Argument, error) {
 	switch args[0] {
 	case string(Add):
 		arg = Argument{Operation: Add}
+	case string(Get):
+		arg = Argument{Operation: Get}
 	case string(List):
 		arg = Argument{Operation: List}
 	case string(ToggleDone):

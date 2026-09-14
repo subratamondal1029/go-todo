@@ -29,4 +29,6 @@ go.work
 .vscode
 .env
 bin/
-db/todos.db # development db
+
+# development db
+db/todos.db 

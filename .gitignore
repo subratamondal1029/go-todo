@@ -30,5 +30,5 @@ go.work
 .env
 bin/
 
-# development db
-db/todos.db 
+# db
+**/**/todos.db

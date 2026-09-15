@@ -62,7 +62,7 @@ func Resolve(args *cli.Argument, connection *database.Connection) {
 
 		PrintDataTable(&[]database.Todo{*todo})
 
-	case cli.ToggleDone:
+	case cli.Done:
 		id := args.Value[0]
 		done := args.Value[1]
 

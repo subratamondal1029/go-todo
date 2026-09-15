@@ -2,7 +2,6 @@ package cli
 
 import (
 	_ "embed"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -47,5 +46,5 @@ func init() {
 		}
 	}
 
-	DBURI = fmt.Sprintf("sqlite:///%s", dbPath)
+	DBURI = dbPath
 }

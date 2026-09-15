@@ -11,14 +11,19 @@ import (
 )
 
 const changeStatus = `-- name: ChangeStatus :one
-INSERT INTO todos (
-    completed
-) VALUES (?)
+UPDATE todos
+SET completed = ?
+WHERE id = ?
 RETURNING id, title, completed, completed_at, created_at
 `
 
-func (q *Queries) ChangeStatus(ctx context.Context, completed sql.NullBool) (Todo, error) {
-	row := q.db.QueryRowContext(ctx, changeStatus, completed)
+type ChangeStatusParams struct {
+	Completed sql.NullBool
+	ID        int64
+}
+
+func (q *Queries) ChangeStatus(ctx context.Context, arg ChangeStatusParams) (Todo, error) {
+	row := q.db.QueryRowContext(ctx, changeStatus, arg.Completed, arg.ID)
 	var i Todo
 	err := row.Scan(
 		&i.ID,

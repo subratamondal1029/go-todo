@@ -13,9 +13,9 @@ INSERT INTO todos (
 RETURNING *;
 
 -- name: ChangeStatus :one
-INSERT INTO todos (
-    completed
-) VALUES (?)
+UPDATE todos
+SET completed = ?
+WHERE id = ?
 RETURNING *;
 
 -- name: Delete :exec

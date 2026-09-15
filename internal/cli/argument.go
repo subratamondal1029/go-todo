@@ -46,5 +46,7 @@ func GetArguments() (*Argument, error) {
 
 	arg.Value = args[1:]
 
+	// TODO: remove empty spaces
+
 	return &arg, nil
 }

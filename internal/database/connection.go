@@ -5,26 +5,29 @@ import (
 	"fmt"
 
 	_ "github.com/glebarez/go-sqlite"
-	"github.com/subratamondal1029/goTodo/internal/cli"
 )
 
 type Connection struct {
-	db      *sql.DB
-	queries *Queries
+	DB      *sql.DB
+	Queries *Queries
 }
 
-func Connect() (*Connection, error) {
-	dbConn, err := sql.Open("sqlite", cli.DBURI)
+func Connect(dbURI string) (*Connection, error) {
+	dbConn, err := sql.Open("sqlite", dbURI)
 
 	if err != nil {
 		return nil, fmt.Errorf("Error opening db connection, %w", err)
 	}
-	defer dbConn.Close()
+
+	if err := dbConn.Ping(); err != nil {
+		dbConn.Close()
+		return nil, fmt.Errorf("Error pinging db, %w", err)
+	}
 
 	queries := New(dbConn)
 
 	return &Connection{
-		db:      dbConn,
-		queries: queries,
+		DB:      dbConn,
+		Queries: queries,
 	}, nil
 }

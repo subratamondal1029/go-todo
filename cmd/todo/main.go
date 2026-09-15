@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/subratamondal1029/goTodo/internal/cli"
+	"github.com/subratamondal1029/goTodo/internal/database"
 )
 
 func main() {
@@ -15,5 +16,13 @@ func main() {
 	}
 
 	fmt.Println(args)
-	fmt.Printf("Db uri: %s\n", cli.DBURI)
+
+	connection, err := database.Connect(cli.DBURI)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	defer connection.DB.Close()
+
+	fmt.Println("Database connected.")
 }

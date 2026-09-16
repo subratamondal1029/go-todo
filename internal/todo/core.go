@@ -34,6 +34,10 @@ func Resolve(args *cli.Argument, connection *database.Connection) {
 		PrintDataTable(&todos)
 
 	case cli.Get:
+		if len(args.Value) < 1 {
+			log.Fatalf("Arguments underload \n usage: todo %s <id>", cli.Get)
+		}
+
 		id := args.Value[0]
 		idInt, err := strToInt(id)
 
@@ -49,6 +53,10 @@ func Resolve(args *cli.Argument, connection *database.Connection) {
 		PrintDataTable(&[]database.Todo{*todo})
 
 	case cli.Add:
+		if len(args.Value) < 1 {
+			log.Fatalf("Arguments underload \n usage: todo %s <title>", cli.Add)
+		}
+
 		title := strings.Join(args.Value, " ")
 		if title == "" {
 			log.Fatal("Title cannot be empty")
@@ -63,6 +71,10 @@ func Resolve(args *cli.Argument, connection *database.Connection) {
 		PrintDataTable(&[]database.Todo{*todo})
 
 	case cli.Done:
+		if len(args.Value) < 2 {
+			log.Fatalf("Arguments underload \n usage: todo %s <id> <true|false>", cli.Done)
+		}
+
 		id := args.Value[0]
 		done := args.Value[1]
 
@@ -86,6 +98,10 @@ func Resolve(args *cli.Argument, connection *database.Connection) {
 		PrintDataTable(&[]database.Todo{*todo})
 
 	case cli.Delete:
+		if len(args.Value) < 1 {
+			log.Fatalf("Arguments underload \n usage: todo %s <id>", cli.Delete)
+		}
+
 		id := args.Value[0]
 		idInt, err := strToInt(id)
 

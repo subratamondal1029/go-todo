@@ -1,4 +1,4 @@
-package pkgs
+package cli
 
 import (
 	"fmt"
@@ -8,10 +8,11 @@ import (
 type Operation string
 
 const (
-	Add        Operation = "add"
-	List       Operation = "list"
-	ToggleDone Operation = "toggle-done"
-	Delete     Operation = "delete"
+	Add    Operation = "add"
+	List   Operation = "list"
+	Get    Operation = "get"
+	Done   Operation = "done"
+	Delete Operation = "delete"
 )
 
 type Argument struct {
@@ -31,10 +32,12 @@ func GetArguments() (*Argument, error) {
 	switch args[0] {
 	case string(Add):
 		arg = Argument{Operation: Add}
+	case string(Get):
+		arg = Argument{Operation: Get}
 	case string(List):
 		arg = Argument{Operation: List}
-	case string(ToggleDone):
-		arg = Argument{Operation: ToggleDone}
+	case string(Done):
+		arg = Argument{Operation: Done}
 	case string(Delete):
 		arg = Argument{Operation: Delete}
 	default:
@@ -42,6 +45,8 @@ func GetArguments() (*Argument, error) {
 	}
 
 	arg.Value = args[1:]
+
+	// TODO: remove empty spaces
 
 	return &arg, nil
 }

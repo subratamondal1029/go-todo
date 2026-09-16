@@ -39,11 +39,11 @@ func init() {
 			if err := os.WriteFile(dbPath, emptyDB, 0644); err != nil {
 				log.Panicf("Can't create database file, %v", err)
 			}
-		} else if dbPathStat.IsDir() {
-			log.Panicln("Database file is a directory")
 		} else {
 			log.Panicf("Error reading db file, %v", err)
 		}
+	} else if dbPathStat.IsDir() {
+		log.Panicln("Database file is a directory")
 	}
 
 	DBURI = dbPath

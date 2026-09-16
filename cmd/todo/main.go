@@ -26,5 +26,21 @@ func main() {
 
 	fmt.Println("Database connected.")
 	fmt.Println(strings.Repeat("=", 20))
-	todo.Resolve(args, connection)
+	if !args.Skip {
+		err = todo.Resolve(args, connection)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+	} else {
+		fmt.Println("TUI initiated")
+		text, err := cli.Ask("Enter your text: ")
+
+		if err != nil {
+			log.Panic(err)
+		}
+
+		fmt.Printf("You entered: %s\n", text)
+	}
 }

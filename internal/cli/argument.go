@@ -16,6 +16,7 @@ const (
 )
 
 type Argument struct {
+	Skip      bool
 	Operation Operation
 	Value     []string
 }
@@ -24,7 +25,7 @@ func GetArguments() (*Argument, error) {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
-		return nil, fmt.Errorf("no arguments provided")
+		return &Argument{Skip: true}, nil
 	}
 
 	var arg Argument
@@ -45,8 +46,6 @@ func GetArguments() (*Argument, error) {
 	}
 
 	arg.Value = args[1:]
-
-	// TODO: remove empty spaces
 
 	return &arg, nil
 }
